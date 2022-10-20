@@ -23,11 +23,17 @@ public class Tests : BasePage
     public void Test2()
     {
         Thread.Sleep(2000);
-        driver.FindElement(By.XPath("//*[@id='onetrust-accept-btn-handler']")).Click();
+        IWebElement cookiesAcceptAllButton = driver.FindElement(By.XPath("//*[@id='onetrust-accept-btn-handler']"));
+        bool isElementDisplayed = driver.FindElement(By.XPath("//*[@id='onetrust-accept-btn-handler']")).Displayed;
+        if(isElementDisplayed == true)
+        {
+            driver.FindElement(By.XPath("//*[@id='onetrust-accept-btn-handler']")).Click();
+        }
+        
         //IWebElement przyciskMA = driver.FindElement(By.XPath("//html/body/div[1]/div[1]/header/div[2]/div[1]/ul/li[2]/ul/li/a"));
-        IWebElement przyciskMA = driver.FindElement(By.PartialLinkText("MyAviva"));
+        //IWebElement przyciskMA = driver.FindElement(By.PartialLinkText("MyAviva"));
+        IWebElement przyciskMA = driver.FindElement(By.XPath("//li[@class='o-masthead__login-link']//*[text()='MyAviva']"));
         przyciskMA.Click();
-        //Thread.Sleep(1000);
         Console.WriteLine(driver.Title);
         Assert.AreEqual("MyAviva - Aviva plc",driver.Title);
     }
